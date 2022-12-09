@@ -51,7 +51,6 @@ const getDeptHtml = (deptList) => {
     return deptHtml;
 }
 
-
 const createEmployeePayrollJSON = () => {
     let empPayrollListLocal = [
         {

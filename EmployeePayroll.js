@@ -82,4 +82,5 @@ class EmployeePayrollData {
         return 'Name = ' + this.name + ", Gender = " + this.gender + ", ProfilePic = " + this.profilePic 
         +", Department = " + this.department + ", Salary = " + this.salary +", StartDate = " + empDate + ", Note = " + this.note;
     }
+    
 }
