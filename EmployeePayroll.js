@@ -8,6 +8,15 @@ class EmployeePayrollData {
         this.salary = params[4];
         this.startDate = params[5];
         this.notes = params[6];
+
+       }
+
+    get id(){
+        return this._id;
+    }
+
+    set id(id){
+        this._id = id;
     }
 
     get name() {
