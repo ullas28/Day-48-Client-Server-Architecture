@@ -14,6 +14,7 @@ function makePromiseCall(methodType, url, async = true, data = null) {
                 console.log("XR Failed!");
             }
         }
+        
         xhr.onerror = function () {
             reject({
                 status: this.status,

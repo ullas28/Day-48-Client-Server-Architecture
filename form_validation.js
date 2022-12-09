@@ -106,7 +106,6 @@ const save = () => {
         item.checked = false;
     })
   }
-
   
   const setTextValue = (id, value) => {
     const element  = document.querySelector(id);
