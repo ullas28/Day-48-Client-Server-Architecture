@@ -9,6 +9,57 @@
   <link rel="stylesheet" href="../css/test_services.css">
 </head>
 
+
+<script>
+  const getElem = document.querySelector("#get-services");
+  const getURL = "http://127.0.0.1:3000/EmployeePayrollDB/1";
+  makeServiceCall("GET",getURL,true)
+  .then(responseText => {
+    getElem.textContent = "GET USER DATA: "+responseText;
+  })
+  .catch(error => {
+    getElem.textContent = "GET Error Status: " + JSON.stringify(error);
+  });
+
+  const deleteElem = document.querySelector("#delete_services");
+  const deleteURL = "http://127.0.0.1:3000/EmployeePayrollDB/3";
+  makeServiceCall("DELETE", deleteURL, false)
+  .then(responseText => {
+    deleteElem.textContent = "Delete Data : " + responseText;
+  })
+  .catch(error => {
+    deleteElem.textContent = "DELETE Error Status: "+JSON.stringify(error);
+  })
+
+  const empPayrollData = 
+  {
+    
+      "_name": "Amarpa Shashanka Keerthi Kumar",
+      "_gender": "female",
+      "_department": [
+        "Sales"
+      ],
+      "_salary": "400000",
+      "_startDate": "29 Oct 2019",
+      "_note": "",
+      "_profilePic": "../assets/profile-images/Ellipse -1.png",
+    };
+  
+  const postElem = document.querySelector("#post_services");
+  const postURL = "http://127.0.0.1:3000/EmployeePayrollDB/";
+  makeServiceCall("POST", postURL, true, empPayrollData)
+  .then(responseText => {
+    postElem.textContent = "New User Data: " +responseText;
+  })
+  .catch(error => {
+    postElem.textContent = "POST Error Status: "+JSON.stringify(error);
+  });
+</script>
+
+
+
+
+
 <body>
   <h1>The Test Services Result</h1>
   <div id="get_services"></div>
