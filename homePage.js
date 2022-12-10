@@ -105,7 +105,17 @@ const remove = (node) => {
                     .map( empData => empData._id )
                     .indexOf(empPayrollData._id);
     empPayrollList.splice(index, 1);
-    localStorage.setItem("EmployeePayrollList", JSON.stringify(empPayrollList));
-    document.querySelector(".emp-count").textContent = empPayrollList.length;
-    createInnerHtml();
+    if(site_properties.use_local_storage.match("true")){
+        localStorage.setItem("EmployeePayrollList", JSON.stringify(empPayrollList));
+        createInnerHtml();
+    }else {
+        const deleteURL = site_properties.server_url + empPayrollData.id.toString();
+        makeServiceCall("DELETE", deleteURL, false)
+        .then(reponseText => {
+            createInnerHtm();
+        })
+        .catch(error => {
+            console.log("DELETE Error Status: " + JSON.stringify(error));
+        });
+}
 }
