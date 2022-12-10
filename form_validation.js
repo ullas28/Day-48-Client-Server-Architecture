@@ -37,9 +37,18 @@ date.addEventListener('input', function() {
 });
 
 const save = () => {
+  event.preventDefault();
+  event.stopPropagation();
     try {
-      let employeePayrollData = createEmployeePayroll();
-      createAndUpdateStorage(employeePayrollData);
+      setEmployeePayrollObject();
+      if(site_properties.use_local_storage.match("true")){
+        createAndUpdateStorage();
+        resetForm();
+        window.location.replace(site_properties.home_page);
+      }
+      else{
+        createOrUpdateEmployeePayroll();
+      }
     }
     catch (e) {
       return;
@@ -146,4 +155,21 @@ const save = () => {
   const setValue = (id, value) => {
     const element = document.querySelector(id);
     element.value = value;
+  }
+
+  const createOrUpdateEmployeePayroll = () => {
+    let postURL = site-properties.server_url;
+    let methodCall = "POST";
+    if(isUpdate){
+      methodCall = "PUT";
+      postURL = postURL + employeePayrollObj.id.toString();
+    }
+    makeServiceCall(methodCall, postURL, true, employeePayrollObj)
+    .then(responseText => {
+      resetForm();
+      window.location.replace(site_properties.home_Page);
+    })
+    .catch(error => {
+      throw error;
+    });
   }
